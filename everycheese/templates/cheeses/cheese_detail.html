@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Cheeses: {{ cheese.name }}{% endblock %}
 {% block content %}
-<h2>{{ cheese.name }}</h2>
+<h2>{{ cheese.name }}</h2>  
 {% if cheese.description %}
 <p>{{ cheese.description }}</p>
 {% endif %}
+
+
+{%if cheese.country_of_origin%}
+<p>Country of Origin: {{cheese.country_of_origin.name}}</p>
+<img src="{{cheese.country_of_origin.flag}}" alt="Flag" height="50" width="40"/>
+
+
+{%endif%}
+
+
+
 {% endblock content %}
