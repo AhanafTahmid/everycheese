@@ -12,7 +12,9 @@ CheeseDetailView
 )
 from .factories import CheeseFactory
 pytestmark = pytest.mark.django_db
+from .factories import CheeseFactory, cheese
 
+from ..views import (CheeseCreateView,CheeseListView,CheeseDetailView,CheeseUpdateView)
 
 def test_good_cheese_list_view_expanded(rf):
     # Determine the URL
@@ -70,3 +72,48 @@ def test_good_cheese_list_view_expanded(rf):
 #     assertContains(response, cheese.name)
 #     assertContains(response, cheese.get_firmness_display())
 #     assertContains(response, cheese.country_of_origin.name)
+
+
+
+# def test_cheese_create_correct_title(rf, admin_user):
+#     """Page title for CheeseCreateView should be Add Cheese."""
+#     request = rf.get(reverse('cheeses:add'))
+#     request.user = admin_user
+#     response = CheeseCreateView.as_view()(request)
+#     assertContains(response, 'Add Cheese')
+
+
+# def test_good_cheese_update_view(rf, admin_user, cheese):
+#     url = reverse("cheeses:update",
+#     kwargs={'slug': cheese.slug})
+#     # Make a request for our new cheese
+#     request = rf.get(url)
+#     # Add an authenticated user
+#     request.user = admin_user
+#     # Use the request to get the response
+#     callable_obj = CheeseUpdateView.as_view()
+#     response = callable_obj(request, slug=cheese.slug)
+#     # Test that the response is valid
+#     assertContains(response, "Update Cheese")
+
+
+
+# def test_cheese_update(rf, admin_user, cheese):
+#     """POST request to CheeseUpdateView updates a cheese
+#     and redirects.
+#     """
+#     # Make a request for our new cheese
+#     form_data = {
+#     'name': cheese.name,
+#     'description': 'Something new',
+#     'firmness': cheese.firmness
+#     }
+#     url = reverse("cheeses:update",
+#     kwargs={'slug': cheese.slug})
+#     request = rf.post(url, form_data)
+#     request.user = admin_user
+#     callable_obj = CheeseUpdateView.as_view()
+#     response = callable_obj(request, slug=cheese.slug)
+#     # # Check that the cheese has been changed
+#     cheese.refresh_from_db()
+#     assert cheese.description == 'Something new'
